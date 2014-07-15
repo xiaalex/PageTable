@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Simple Paging Grid - Sorting Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/PageTable.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="script/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="script/underscore.js"></script>
+    <script type="text/javascript" src="script/PageTable.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		        var data = [
+		                { "ID": 1, "Name": "Pineapple line 1", "Price": 1.50, "Quantity": 4 },
+						{ "ID": 2, "Name": "Strawberry", "Price": 1.10, "Quantity": 40 },
+						{ "ID": 3, "Name": "Oranges", "Price": 0.20, "Quantity": 8 },
+						{ "ID": 4, "Name": "Apples", "Price": 1.50, "Quantity": 5 },
+						{ "ID": 5, "Name": "Raspberries", "Price": 1.50, "Quantity": 20 },
+						{ "ID": 6, "Name": "Blueberries", "Price": 1.50, "Quantity": 20 },
+						{ "ID": 7, "Name": "Pairs", "Price": 1.50, "Quantity": 8 },
+						{ "ID": 8, "Name": "Melons", "Price": 1.50, "Quantity": 2 },
+						{ "ID": 9, "Name": "Potatoes", "Price": 1.50, "Quantity": 6 },
+						{ "ID": 10, "Name": "Sweet Potatoes line 10", "Price": 1.50, "Quantity": 3 },
+						{ "ID": 11, "Name": "Cabbages page 2", "Price": 1.50, "Quantity": 1 },
+						{ "ID": 12, "Name": "Lettuce", "Price": 1.50, "Quantity": 1 },
+						{ "ID": 13, "Name": "Onions", "Price": 1.50, "Quantity": 25 },
+						{ "ID": 14, "Name": "Carrots", "Price": 1.50, "Quantity": 30 },
+						{ "ID": 15, "Name": "Broccoli", "Price": 1.50, "Quantity": 1 },
+						{ "ID": 16, "Name": "Cauliflower", "Price": 1.50, "Quantity": 1 },
+						{ "ID": 17, "Name": "Peas", "Price": 1.50, "Quantity": 1 },
+						{ "ID": 18, "Name": "Sweetcorn", "Price": 1.50, "Quantity": 2 },
+						{ "ID": 19, "Name": "Gooseberries", "Price": 1.50, "Quantity": 20 },
+						{ "ID": 20, "Name": "Spring Onions page 2", "Price": 1.50, "Quantity": 9 },
+		                { "ID": 21, "Name": "Beetroot", "Price": 0.30, "Quantity": 3 },
+                		{ "ID": 22, "Name": "Avocado", "Price": 2.30, "Quantity": 1 }];
+                var source = data;
+
+		        $("#exampleGrid").PageTable({
+		            columnNames: ["Name", "Price", "Quantity"],
+                    columnSortables: ["Name", "Price", "Quantity"],
+                    pageSize: 10,
+                    dataSource: source
+		        });
+
+
+                function ref() {
+                    $("#exampleGrid").PageTable('refresh', {dataSource: data});
+                }; 
+
+                //setInterval(ref, 5000);
+		    });
+	</script>
+
+</head>
+<body>
+
+<div id="exampleGrid"></div>
+
+</body>
+</html>

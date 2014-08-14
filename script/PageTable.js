@@ -4,6 +4,37 @@
 
 ;(function ($) {
 
+    function formatURL(link) {
+        if(link.charAt(link.length-1) != "/") link += "/";
+        return link;
+    }
+
+    function dosubmit(method, path, params) {
+        if (method.toLowerCase() != 'get') {
+            params = params || {};
+            params.method = method.toLowerCase();
+            method = 'post';
+        }
+
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+             }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
     var pluginName = "PageTable";
     var oldpluginName = $.fn[pluginName];
 
@@ -119,7 +150,7 @@
         },
 
         _buildTable: function () {
-            var table = _self._tableTemplate(_self._pageSource, _self._options.columnNames, _self._options.columnWidths);
+            var table = _self._tableTemplate(_self._pageSource, _self._options.columnNames, _self._options.columnWidths, formatURL(_self._options.linkURL));
             _self._table = $(table);
             _self._addTableEvent();
         },
@@ -154,8 +185,8 @@
             theader.click(function(event) {
                 event.preventDefault();
                 var source = $(event.target);
-                if (source.tagName != 'th') {
-                    source = source.closest('th');
+                if (source.prop("tagName") != 'TH') {
+                    source = source.closest('TH');
                 }
                 _self._sortedColumn = source.attr('name');
 
@@ -168,6 +199,16 @@
                         _self._sortedOrder = null;
                 }
                 _self._refreshData('head.click');
+            });
+
+            tbody.click(function(event) {
+                event.preventDefault();
+                var source = $(event.target);
+                if (source.prop("tagName") == 'A') {
+                    var link = source.attr('link-url');
+                    var method = source.attr('link-method');
+			    	dosubmit(method, link);
+                }
             });
 
             function isColumnSortable(name) {
@@ -230,7 +271,7 @@
             return header + page + tail;
         },
 
-        _tableTemplate: function(dataSource, columnNames, columnWidths) {
+        _tableTemplate: function(dataSource, columnNames, columnWidths, linkURL) {
             var hstart = '<table class="table table-striped table-bordered table-hover"><thead><tr>';
             var hspan = '<div class="sort-container pull-right"><span class="glyphicon glyphicon-chevron-up sort-null"></span>';
             var htail = '</tr></thead>';
@@ -242,16 +283,22 @@
                                 %><th name="<%= Names[i] %>" width="<%= Widths[i] %>"><%= Names[i] + SortSpan %></th><% \
                             } else { \
                                 %><th name="<%= Names[i] %>"><%= Names[i] + SortSpan %></th><% \
-                            } } %>');
-            var header = hstart + htemplate({Names: columnNames, Widths: columnWidths, SortSpan: hspan}) + htail;
+                            } } \
+                            if (Link) { \
+                                %><th>&nbsp;</th><% \
+                            } \
+                            %>');
+            var header = hstart + htemplate({Names: columnNames, Widths: columnWidths, SortSpan: hspan, Link: linkURL}) + htail;
 
             var btemplate = _.template('<% for (var i=0; i<Source.length; i++) { \
                                 %><tr><% \
                                 for (var j=0; j<Names.length; j++) { \
-                                    %><td><%= Source[i][Names[j]] %></td><% } \
-                                %></tr><% \
-                            } %>');
-            var body = bstart + btemplate({Source: dataSource, Names: columnNames}) + btail;
+                                    %><td><%= Source[i][Names[j]] %></td><% \
+                                } \
+                                if (Link) { \
+                                    %><td><a link-url="<%= Link %><%= Source[i].id %>" link-method="get">Edit</a>&nbsp;<a link-url="<%= Link %><%= Source[i].id %>" link-method="delete">Delete</a></td></tr><% \
+                                } } %>');
+            var body = bstart + btemplate({Source: dataSource, Names: columnNames, Link: linkURL}) + btail;
             return header + body;
         },
 
@@ -260,12 +307,12 @@
             columnNames: null,
             columnLabels: null,
             columnWidths: null,
-            columnWidths: null,
             columnSortables: null,
             sortedColumn: null,
             sortedOrder: null,
             pageNumber: 1,
             dataSource: null,
+            linkURL: null,
             width: 250,
             height: 200
         },

@@ -17,35 +17,36 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		        var data = [
-		                { "ID": 1, "Name": "Pineapple line 1", "Price": 1.50, "Quantity": 4 },
-						{ "ID": 2, "Name": "Strawberry", "Price": 1.10, "Quantity": 40 },
-						{ "ID": 3, "Name": "Oranges", "Price": 0.20, "Quantity": 8 },
-						{ "ID": 4, "Name": "Apples", "Price": 1.50, "Quantity": 5 },
-						{ "ID": 5, "Name": "Raspberries", "Price": 1.50, "Quantity": 20 },
-						{ "ID": 6, "Name": "Blueberries", "Price": 1.50, "Quantity": 20 },
-						{ "ID": 7, "Name": "Pairs", "Price": 1.50, "Quantity": 8 },
-						{ "ID": 8, "Name": "Melons", "Price": 1.50, "Quantity": 2 },
-						{ "ID": 9, "Name": "Potatoes", "Price": 1.50, "Quantity": 6 },
-						{ "ID": 10, "Name": "Sweet Potatoes line 10", "Price": 1.50, "Quantity": 3 },
-						{ "ID": 11, "Name": "Cabbages page 2", "Price": 1.50, "Quantity": 1 },
-						{ "ID": 12, "Name": "Lettuce", "Price": 1.50, "Quantity": 1 },
-						{ "ID": 13, "Name": "Onions", "Price": 1.50, "Quantity": 25 },
-						{ "ID": 14, "Name": "Carrots", "Price": 1.50, "Quantity": 30 },
-						{ "ID": 15, "Name": "Broccoli", "Price": 1.50, "Quantity": 1 },
-						{ "ID": 16, "Name": "Cauliflower", "Price": 1.50, "Quantity": 1 },
-						{ "ID": 17, "Name": "Peas", "Price": 1.50, "Quantity": 1 },
-						{ "ID": 18, "Name": "Sweetcorn", "Price": 1.50, "Quantity": 2 },
-						{ "ID": 19, "Name": "Gooseberries", "Price": 1.50, "Quantity": 20 },
-						{ "ID": 20, "Name": "Spring Onions page 2", "Price": 1.50, "Quantity": 9 },
-		                { "ID": 21, "Name": "Beetroot", "Price": 0.30, "Quantity": 3 },
-                		{ "ID": 22, "Name": "Avocado", "Price": 2.30, "Quantity": 1 }];
+		                { "id": 1, "Name": "Pineapple line 1", "Price": 1.50, "Quantity": 4 },
+						{ "id": 2, "Name": "Strawberry", "Price": 1.10, "Quantity": 40 },
+						{ "id": 3, "Name": "Oranges", "Price": 0.20, "Quantity": 8 },
+						{ "id": 4, "Name": "Apples", "Price": 1.50, "Quantity": 5 },
+						{ "id": 5, "Name": "Raspberries", "Price": 1.50, "Quantity": 20 },
+						{ "id": 6, "Name": "Blueberries", "Price": 1.50, "Quantity": 20 },
+						{ "id": 7, "Name": "Pairs", "Price": 1.50, "Quantity": 8 },
+						{ "id": 8, "Name": "Melons", "Price": 1.50, "Quantity": 2 },
+						{ "id": 9, "Name": "Potatoes", "Price": 1.50, "Quantity": 6 },
+						{ "id": 10, "Name": "Sweet Potatoes line 10", "Price": 1.50, "Quantity": 3 },
+						{ "id": 11, "Name": "Cabbages page 2", "Price": 1.50, "Quantity": 1 },
+						{ "id": 12, "Name": "Lettuce", "Price": 1.50, "Quantity": 1 },
+						{ "id": 13, "Name": "Onions", "Price": 1.50, "Quantity": 25 },
+						{ "id": 14, "Name": "Carrots", "Price": 1.50, "Quantity": 30 },
+						{ "id": 15, "Name": "Broccoli", "Price": 1.50, "Quantity": 1 },
+						{ "id": 16, "Name": "Cauliflower", "Price": 1.50, "Quantity": 1 },
+						{ "id": 17, "Name": "Peas", "Price": 1.50, "Quantity": 1 },
+						{ "id": 18, "Name": "Sweetcorn", "Price": 1.50, "Quantity": 2 },
+						{ "id": 19, "Name": "Gooseberries", "Price": 1.50, "Quantity": 20 },
+						{ "id": 20, "Name": "Spring Onions page 2", "Price": 1.50, "Quantity": 9 },
+		                { "id": 21, "Name": "Beetroot", "Price": 0.30, "Quantity": 3 },
+                		{ "id": 22, "Name": "Avocado", "Price": 2.30, "Quantity": 1 }];
                 var source = data;
 
 		        $("#exampleGrid").PageTable({
 		            columnNames: ["Name", "Price", "Quantity"],
                     columnSortables: ["Name", "Price", "Quantity"],
-                    pageSize: 10,
-                    dataSource: source
+                    columnWidths: ["40%", "40%", "20%"],
+                    dataSource: source,
+                    linkURL: '/home'
 		        });
 
 

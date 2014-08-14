@@ -41,11 +41,11 @@ The data source should have fomat like following.
 
 ```javascript
 var data = [
-    { "ID": 1, "Name": "Pineapple line 1", "Price": 1.50, "Quantity": 4 },
-    { "ID": 2, "Name": "Strawberry", "Price": 1.10, "Quantity": 40 },
-    { "ID": 3, "Name": "Oranges", "Price": 0.20, "Quantity": 8 },
-    { "ID": 4, "Name": "Apples", "Price": 1.50, "Quantity": 5 },
-    { "ID": 5, "Name": "Raspberries", "Price": 1.50, "Quantity": 20 }];
+    { "id": 1, "Name": "Pineapple line 1", "Price": 1.50, "Quantity": 4 },
+    { "id": 2, "Name": "Strawberry", "Price": 1.10, "Quantity": 40 },
+    { "id": 3, "Name": "Oranges", "Price": 0.20, "Quantity": 8 },
+    { "id": 4, "Name": "Apples", "Price": 1.50, "Quantity": 5 },
+    { "id": 5, "Name": "Raspberries", "Price": 1.50, "Quantity": 20 }];
 ```
 
 If you don't have data yet, just pass the null dataSource and use call back function to refresh the table when data is ready.
@@ -55,6 +55,8 @@ function refreshcallback() {
     $("#exampleGrid").PageTable('refresh', {dataSource: data});
 }; 
 ```
+
+The linkURL option follows the convension as specified in my blog <a href="http://xiaalex.wordpress.com/2013/05/23/restful-api-design/">RESTful API design</a>.
 
 That's it. Enjoy.
 
